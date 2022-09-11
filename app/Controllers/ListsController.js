@@ -5,18 +5,18 @@ import { setHTML } from "../Utils/Writer.js";
 
  function drawLists(){
   let template =''
-  appState.lists.forEach(list=> template += list.ListTemplate)
+  appState.lists.forEach(list => template += list.ListTemplate)
   setHTML('lists', template)
   console.log('hello from drawLists!');
-
+ 
 }
+
 export class ListsController{
   constructor(){
-    console.log("controllor says hi");
+    console.log("controller says hi");
     appState.on('lists', drawLists)
     appState.on('tasks', drawLists)
-   drawLists()
-    
+    drawLists()
   }
 
   createList(){
@@ -26,7 +26,6 @@ export class ListsController{
       // @ts-ignore
       const form= window.event.target
       let formData = getFormData(form)
-      console.log(formData);
       listsService.createList(formData)
       // @ts-ignore
       form.reset()

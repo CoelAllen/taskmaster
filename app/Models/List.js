@@ -1,12 +1,12 @@
 import { appState } from "../AppState.js";
+import { tasksService } from "../Services/TasksService.js";
 import { generateId } from "../Utils/generateId.js";
 
 export class List{
   constructor(data){
-    this.id = generateId()
+    this.id = data.id || generateId()
     this.name = data.name
-    this.color=data.color
-
+    this.color = data.color
   }
   
   get ListTemplate(){
@@ -17,11 +17,10 @@ export class List{
           <i class="p-1 bi bi-x-lg" onclick="app.listsController.removeList('${this.id}')" title = "Remove List" ></i>
         </div>
         <div class='text-center text-light pb-2' style= 'background-color: ${this.color}' >
-          <h4>${this.name}</h4>
-          <p>2/${this.Tasks.length}</p>
+          <h4 class="listText">${this.name}</h4>
+          <p class="listText" >${this.TasksComplete}/${this.Tasks.length}</p>
         </div>
-        <ul class="list-group elevation-2 mb-3">
-          <!--REVIEW do this tomorrow-->
+        <ul id = "tasks" class="list-group elevation-2 mb-3">
           ${this.TaskTemplates}
         </ul>
         <form class="rounded p-2" onsubmit="app.tasksController.addTask('${this.id}')">
@@ -50,8 +49,12 @@ export class List{
     
     
   get Tasks(){
-  let tasks = appState.tasks.filter(t=>t.listId=this.id)
-  return tasks
+    let template = ''
+    let tasks = appState.tasks.filter(task => task.listId == this.id)
+    tasks.forEach(task => template += task.Template)
+    return tasks
 }
-
+ get TasksComplete(){
+   return this.Tasks.filter(t => t.taskComplete == true).length
+}
 }

@@ -17,8 +17,7 @@ class TasksService{
     let task = new Task(formData)
     appState.tasks = [task, ...appState.tasks]
     saveState('tasks', appState.tasks)
-    console.log(appState.tasks);
-
+    console.log(appState.tasks, "Hi from T-Serve");
   }
   removeTask(id){
     let tasks = appState.tasks.filter(t=> t.id !== id)

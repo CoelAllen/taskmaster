@@ -8,6 +8,7 @@ class ListsService{
 
 
   createList(formData){
+    console.log("form data: ", formData);
     let list = new List(formData)
     appState.lists =[list, ...appState.lists]
     saveState('lists', appState.lists)

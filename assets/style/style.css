@@ -1,1 +1,10 @@
 /* BASIC STYLES HERE */
+.listText {
+  text-shadow: 2px 2px rgb(20, 20, 20);
+  font-family: 'Grechen Fuemen', cursive;
+}
+
+h1 {
+  font-family: 'Grechen Fuemen', cursive;
+  font-size: 5rem;
+}
